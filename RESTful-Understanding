@@ -1,0 +1,42 @@
+理解RESTful架构:
+  --客户端和服务端交互的过程
+  
+  1.起源：Fielding提出,功能强、性能好、适宜通信的框架。
+  
+  2.Representational State Transfer ------> 表现层状态转化
+  
+  3.Resource ------> 资源
+    表现层状态转化其主语就是资源,即资源的表现层状态转化。
+    资源：网络上的一个实体，URI指定这个实体,因此每一个URI就是一个资源而且是唯一标识。
+    
+  4.Representational ------> 表现层
+    资源是一个实体,它可以由多种形式表现出来,资源呈现出来的形式就是表现层.例如文本可以是采用txt,html,json,二进制等表现出来,图片可以用png,jpg等表现。
+    Http头信息中的Content-Type 即指定了资源的表现形式。
+  
+  5.State Transfer ------> 状态转化
+    客户端和服务端交互的过程必然涉及到数据和状态的变化。
+    HTTP协议，是一个无状态协议。这意味着,所有的状态都保存在服务器端。
+    如果客户端想要操作服务器,就必须采用某种手段使服务器发生状态转化,这种转化是建立在表现层之上的,所以称之为表现层状态转化。
+    客户端用到的手段：HTTP协议,四种最基本的操作GET、POST、PUT、DELETE。
+  
+  6.综上：
+    每一个URI代表一种资源
+    客户端和服务器之间,传递这种资源的某种表现层
+    客户端通过四个动词,对服务器端的资源进行操作,实现表现层状态转化
+    
+  7.误区：
+    1) RESTful接口的URI不应该包含动词,因为资源表示一种实体,应该是一个名词,如：/posts/show/1
+    show 为一个动词,通过GET方式表示show,应该这样设计：/posts/1
+    
+    2) 在URI中加版本号,如：
+      http://www.example.com/app/1.0/foo
+      http://www.example.com/app/1.1/foo
+      http://www.example.com/app/2.0/foo
+      
+      不同的版本可以理解为同一种资源的不同表现形式,既然是同一种资源那么URI一定是相同的,可以用Accept区别版本
+        Accept: vnd.example-com.foo+json; version=1.0
+        Accept: vnd.example-com.foo+json; version=1.1
+        Accept: vnd.example-com.foo+json; version=2.0
+    
+
+  参考文章：http://www.ruanyifeng.com/blog/2011/09/restful  
